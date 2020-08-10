@@ -33,3 +33,6 @@ build/
 .vscode/
 !/src/main/webapp/upload/
 /src/main/webapp/upload/
+!/src/main/webapp/download/
+/src/main/webapp/download/
+
