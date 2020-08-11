@@ -27,6 +27,7 @@ public class APIController {
             HttpServletRequest request,
             @RequestPart("file") MultipartFile file
             ) throws IOException {
+        // add file to local dir
         if (file.isEmpty()) return null;
         String fileName = UUID.randomUUID() + file.getOriginalFilename();
         String path = request.getServletContext().getRealPath("/upload/pdf");
@@ -35,7 +36,7 @@ public class APIController {
             filePath.getParentFile().mkdirs();
         }
         file.transferTo(new File(path + File.separator + fileName));
-        // file added to local dir
+        // fill form
         String inputPath = path + File.separator + fileName;
         String outputPath = request.getServletContext().getRealPath("/download/pdf") + File.separator + fileName;
         Map<String, String[]> params = request.getParameterMap();
