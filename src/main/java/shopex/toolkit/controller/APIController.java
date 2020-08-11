@@ -11,6 +11,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.annot.PdfStampAnnotation;
+import com.itextpdf.pdfa.PdfADocument;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,7 +45,10 @@ public class APIController {
         // file added to local dir
         String inputPath = path + File.separator + fileName;
         String outputPath = request.getServletContext().getRealPath("/download/pdf") + File.separator + fileName;
-        PdfDocument pdfDoc = new PdfDocument(new PdfReader(inputPath), new PdfWriter(outputPath));
+        PdfReader reader = new PdfReader(inputPath);
+        PdfWriter writer = new PdfWriter(outputPath);
+        // PdfADocument pdfa = new PdfADocument(reader, writer);
+        PdfDocument pdfDoc = new PdfDocument(reader, writer);
         PdfAcroForm pdfAcroForm = PdfAcroForm.getAcroForm(pdfDoc, true);
         // fill forms
 
